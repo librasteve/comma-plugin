@@ -71,3 +71,7 @@ tasks {
         formsDirs = files("src/main/org/raku/project/projectWizard/components")
     }
 }
+
+kotlin {
+    jvmToolchain(17)
+}
