@@ -1,4 +1,5 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 
 fun properties(key: String) = project.findProperty(key).toString()
 
@@ -8,7 +9,11 @@ plugins {
     // Gradle IntelliJ Plugin
     id("org.jetbrains.intellij.platform") version "2.0.1"
 
+// TODO: Re-enable if we land on Grammar-Kit as the best option for NQP
+//    id("org.jetbrains.grammarkit") version "2022.3.2.2"
+
     kotlin("jvm") version "2.0.20"
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 group = properties("pluginGroup")
@@ -20,7 +25,6 @@ repositories {
 
     intellijPlatform {
         defaultRepositories()
-        jetbrainsRuntime()
     }
 }
 
@@ -30,17 +34,29 @@ java {
     }
 }
 
+// TODO: Re-enable if we land on Grammar-Kit as our best option for NQP
+//sourceSets {
+//  main {
+//    java {
+//      srcDirs("src/main/gen")
+//    }
+//  }
+//}
+
 intellijPlatform {
     pluginConfiguration {
-        id = "comma"
-        name = "Raku Comma"
-        version = "1.0.0"
-        description = "It's an awesome plugin!"
+        id = "org.raku.comma"
+        name = "Comma for Raku"
+        version = "2.0"
     }
 
     pluginVerification {
         ides {
-            ide(IntelliJPlatformType.IntellijIdeaCommunity, "2024.2")
+            select {
+                types = listOf(IntelliJPlatformType.values().toList().random())
+                channels = listOf(ProductRelease.Channel.RELEASE)
+                sinceBuild = "242"
+            }
         }
     }
 }
@@ -51,15 +67,15 @@ dependencies {
 
         bundledPlugin("com.intellij.java")
 
-        jetbrainsRuntime("21.0.3", "osx", "aarch64")
-
         pluginVerifier()
         zipSigner()
         instrumentationTools()
     }
-    implementation(kotlin("stdlib-jdk8"))
     implementation(files("libs/xchart-3.8.0.jar"))
     implementation(files("libs/moarvmremote.jar"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
     implementation("io.airlift:aircompressor:2.0.2")
     implementation("org.json:json:20240303")
     // TODO: Remove this due to multiple unpatch CVEs
@@ -68,7 +84,7 @@ dependencies {
 
 tasks {
     instrumentCode {
-        formsDirs = files("src/main/org/raku/project/projectWizard/components")
+        formsDirs = files("src/main/org/raku/comma/project/projectWizard/components")
     }
 }
 

@@ -5,6 +5,8 @@
 .intellijPlatform/
 out/
 
+.kotlin/
+
 # Gradle things
 .gradle
 .sandbox/
@@ -14,4 +16,3 @@ raku-idea-plugin/raku-idea-plugin.iml
 
 build/
 .intellijPlatform/self-update.lock
-gradle/
