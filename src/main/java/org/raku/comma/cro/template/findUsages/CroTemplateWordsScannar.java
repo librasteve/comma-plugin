@@ -19,6 +19,7 @@ public class CroTemplateWordsScannar extends VersionedWordsScanner {
     public CroTemplateWordsScannar() {
         myLexer = new CroTemplateLexer();
         myIdentifierTokenSet = TokenSet.create(
+                CroTemplateTokenTypes.IDENTIFER, CroTemplateTokenTypes.FRAGMENT_NAME,
                 CroTemplateTokenTypes.IDENTIFER, CroTemplateTokenTypes.MACRO_NAME,
                 CroTemplateTokenTypes.MODULE_NAME, CroTemplateTokenTypes.SUB_NAME,
                 CroTemplateTokenTypes.VARIABLE_NAME
@@ -51,8 +52,8 @@ public class CroTemplateWordsScannar extends VersionedWordsScanner {
                         if (!processor.process(occurrence)) return;
                     }
                 }
-                else if (type == CroTemplateTokenTypes.SUB_NAME || type == CroTemplateTokenTypes.MACRO_NAME ||
-                        type == CroTemplateTokenTypes.MODULE_NAME) {
+                else if (type == CroTemplateTokenTypes.SUB_NAME || type == CroTemplateTokenTypes.FRAGMENT_NAME ||
+                        type == CroTemplateTokenTypes.MACRO_NAME || type == CroTemplateTokenTypes.MODULE_NAME) {
                     if (text.indexOf('-') == -1) {
                         occurrence.init(text, 0, text.length(), WordOccurrence.Kind.CODE);
                         if (!processor.process(occurrence)) return;

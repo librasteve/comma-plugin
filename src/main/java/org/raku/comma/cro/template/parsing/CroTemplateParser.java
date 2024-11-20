@@ -2348,7 +2348,8 @@ public class CroTemplateParser implements PsiParser {
     }
 
     private boolean sigiltagapply_51_quant_7(PsiBuilder builder, OPP opp) {
-        if ((builder.getTokenType()) == CroTemplateTokenTypes.MACRO_NAME) {
+        if (builder.getTokenType() == CroTemplateTokenTypes.FRAGMENT_NAME
+                || builder.getTokenType() == CroTemplateTokenTypes.MACRO_NAME) {
             builder.advanceLexer();
         } else {
             return false;
@@ -3092,7 +3093,8 @@ public class CroTemplateParser implements PsiParser {
     }
 
     private boolean sigiltagmacro_57_quant_8(PsiBuilder builder, OPP opp) {
-        if ((builder.getTokenType()) == CroTemplateTokenTypes.MACRO_NAME) {
+        if (builder.getTokenType() == CroTemplateTokenTypes.FRAGMENT_NAME
+                || builder.getTokenType() == CroTemplateTokenTypes.MACRO_NAME) {
             builder.advanceLexer();
         } else {
             return false;

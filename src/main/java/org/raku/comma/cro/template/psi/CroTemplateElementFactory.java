@@ -34,4 +34,8 @@ public class CroTemplateElementFactory {
     public static CroTemplateApply createMacroCall(Project project, String name) {
         return produceElement(project, String.format("<|%s>", name), CroTemplateApply.class);
     }
+
+    public static CroTemplateFragmentCall createFragmentCall(Project project, String name) {
+        return produceElement(project, String.format("<~%s>", name), CroTemplateFragmentCall.class);
+    }
 }

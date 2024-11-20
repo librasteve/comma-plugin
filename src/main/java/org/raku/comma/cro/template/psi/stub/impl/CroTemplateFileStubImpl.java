@@ -7,6 +7,7 @@ import org.raku.comma.cro.template.psi.reference.CroTemplateSymbolCollector;
 import org.raku.comma.cro.template.psi.reference.CroTemplateSymbolKind;
 import org.raku.comma.cro.template.psi.stub.CroTemplateFileStub;
 import org.raku.comma.cro.template.psi.stub.CroTemplateMacroStub;
+import org.raku.comma.cro.template.psi.stub.CroTemplateFragmentStub;
 import org.raku.comma.cro.template.psi.stub.CroTemplateSubStub;
 
 public class CroTemplateFileStubImpl extends PsiFileStubImpl<CroTemplateFile> implements CroTemplateFileStub {
@@ -22,6 +23,9 @@ public class CroTemplateFileStubImpl extends PsiFileStubImpl<CroTemplateFile> im
                         child.getPsi());
             else if (child instanceof CroTemplateMacroStub)
                 collector.offer(((CroTemplateMacroStub)child).getName(), CroTemplateSymbolKind.Macro,
+                        child.getPsi());
+            else if (child instanceof CroTemplateFragmentStub)
+                collector.offer(((CroTemplateFragmentStub)child).getName(), CroTemplateSymbolKind.Fragment,
                         child.getPsi());
         }
     }

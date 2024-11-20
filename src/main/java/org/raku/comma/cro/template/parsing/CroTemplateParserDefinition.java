@@ -90,6 +90,8 @@ public class CroTemplateParserDefinition implements ParserDefinition {
             return new CroTemplateBodyImpl(node);
         if (type == CroTemplateElementTypes.APPLY)
             return new CroTemplateApplyImpl(node);
+        if (type == CroTemplateElementTypes.FRAGMENT)
+            return new CroTemplateFragmentImpl(node);
         if (type == CroTemplateElementTypes.PART)
             return new CroTemplatePartImpl(node);
         if (type == CroTemplateElementTypes.SEPARATOR)

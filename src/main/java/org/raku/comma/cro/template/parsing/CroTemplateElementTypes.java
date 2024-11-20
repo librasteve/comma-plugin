@@ -2,11 +2,13 @@ package org.raku.comma.cro.template.parsing;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.stubs.IStubElementType;
+import org.raku.comma.cro.template.psi.stub.CroTemplateFragmentStubElementType;
 import org.raku.comma.cro.template.psi.stub.CroTemplateMacroStubElementType;
 import org.raku.comma.cro.template.psi.stub.CroTemplateSubStubElementType;
 
 public interface CroTemplateElementTypes {
     IStubFileElementType FILE = new CroTemplateFileElementType();
+    IStubElementType FRAGMENT = new CroTemplateMacroStubElementType();
     IStubElementType MACRO = new CroTemplateMacroStubElementType();
     IStubElementType SUB = new CroTemplateSubStubElementType();
     IStubElementType PART = new CroTemplatePartStubElementType();
